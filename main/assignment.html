@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UCC With Three.js - By Karthika Cheeniyil (121108501)</title>
+
+  <style>
+  body{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  </style>
+
+</head>
+<body>
+
+  <div id="container"></div>
+  <video id="video" src="../assets/ucc_video.mp4" width="320" height="240"
+  style="display: none;"> </video>
+
+
+<!-- first vertex shader ------------------------------------------------------>
+<script id="vs1" type="x-shader/x-vertex">
+   varying vec2 vUv;
+   void main() {
+     vUv = uv;
+     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+   }
+ </script>
+
+<script id="fs1" type="x-shader/x-fragment">
+   uniform float time;
+   varying vec2 vUv;
+   void main() {
+     vec2 position = - 1.0 + 2.0 * vUv;
+     float r = abs( sin( position.x * position.y + time / 0.5 ));
+     float g = abs( sin( position.x * position.y + time / 2.5 ));
+     float b = abs( sin( position.x * position.y + time / 0.2 ));
+     gl_FragColor = vec4( r, g, b, 1.0 );
+   }
+</script>
+
+<!-- second vertex shader ----------------------------------------------------->
+<script id="vs2" type="x-shader/x-vertex">
+   varying vec2 vUv;
+   void main() {
+     vUv = uv;
+     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+   }
+ </script>
+
+<script id="fs2" type="x-shader/x-fragment">
+   uniform float time;
+   varying vec2 vUv;
+   void main() {
+     vec2 position = - 1.0 + 2.0 * vUv;
+     float r = abs( sin( position.x * position.y + time / 1.0 ));
+     float g = abs( sin( position.x * position.y + time / 0.0 ));
+     float b = abs( sin( position.x * position.y + time / 0.0 ));
+     gl_FragColor = vec4( r, g, b, 1.0 );
+   }
+</script>
+
+<!-- third vertex shader ------------------------------------------------------>
+<script id="vs3" type="x-shader/x-vertex">
+   varying vec2 vUv;
+   void main() {
+     vUv = uv;
+     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+   }
+ </script>
+
+<script id="fs3" type="x-shader/x-fragment">
+   uniform float time;
+   varying vec2 vUv;
+   void main() {
+     vec2 position = - 1.0 + 2.0 * vUv;
+     float r = abs( sin( position.x * position.y + time / 2.0 ));
+     float g = abs( sin( position.x * position.y + time / 0.5 ));
+     float b = abs( sin( position.x * position.y + time / 2.0 ));
+     gl_FragColor = vec4( r, g, b, 1.0 );
+   }
+</script>
+
+<script type="module" src="./assignment.js"></script>
+<script src="../libs/ammo.wasm.js"></script>
+</body>
+</html>
